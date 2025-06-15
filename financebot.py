@@ -144,6 +144,7 @@ class FinanceBot(Plugin):
                     return
                 
                 data = await response.json()
+                self.log.debug(data)
                 
                 if "Error Message" in data:
                     await evt.respond(f"Error: {data['Error Message']}")
@@ -158,7 +159,7 @@ class FinanceBot(Plugin):
                     await evt.respond(info)
                     return
 
-                if not data or "Name" not in data:
+                if not data or "Meta Data" not in data:
                     await evt.respond(f"No data found for {symbol}/{market}")
                     return
 
