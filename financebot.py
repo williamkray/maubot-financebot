@@ -200,13 +200,14 @@ class FinanceBot(Plugin):
                 # Create the response message
                 response = "<br />".join([
                     f"<b>{symbol}/{market}</b> - {today_date}",
+                    f"",
                     f"Current: {current_price:.2f} {market}",
                     f"24h Change: {day_change_str}",
-                    f"30d Change: {month_change_str}",
-                    f"6m Change: {year_half_change_str}",
                     f"24h Volume: {volume_str} {symbol}",
                     f"24h High: {float(today_data['2. high']):.2f} {market}",
-                    f"24h Low: {float(today_data['3. low']):.2f} {market}"
+                    f"24h Low: {float(today_data['3. low']):.2f} {market}",
+                    f"30d Change: {month_change_str}",
+                    f"6m Change: {year_half_change_str}"
                 ])
 
                 await evt.respond(response, allow_html=True)

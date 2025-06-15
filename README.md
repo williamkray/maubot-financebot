@@ -13,6 +13,7 @@ update the commands you want to use, by default stock data is returned with the 
 
 would return something like this:
 
+```markdown
 **Current data for International Business Machines (https://finance.yahoo.com/quote/IBM) (IBM):**
 
 **Price:** $277.22, ▼-1.3557% from previous close @ $281.03
@@ -22,6 +23,7 @@ would return something like this:
 **Sector:** TECHNOLOGY
 **Market Cap:** $261.19B
 **P/E Ratio:** 47.39
+```
 
 and
 
@@ -29,11 +31,14 @@ and
 
 would return something like this:
 
+```markdown
 **BTC/USD** - 2025-06-15
+
 Current: 105467.27 USD
 24h Change: +1.85 (+0.00%) ↑
-30d Change: +1967.24 (+1.90%) ↑
-6m Change: -669.72 (-0.63%) ↓
 24h Volume: 34.77 BTC
 24h High: 105553.75 USD
 24h Low: 105396.90 USD
+30d Change: +1967.24 (+1.90%) ↑
+6m Change: -669.72 (-0.63%) ↓
+```
