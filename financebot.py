@@ -50,12 +50,21 @@ class FinanceBot(Plugin):
             
             quote_response = await self.http.get(quote_url)
             quote_json = await quote_response.json()
-        except Exception as e:
-            await evt.respond(f"request failed: {e.message}")
-            return None
 
-        try:
-            if "Error Message" in quote_json or "Error Message" in overview_json:
+            if "Error Message" in quote_json:
+                await evt.respond(f"Error: {quote_json['Error Message']}")
+                return
+
+            if "Information" in quote_json:
+                info = quote_json["Information"]
+                # Strip out API key if present
+                api_key = self.config['alphavantageKey']
+                if api_key in info:
+                    info = info.replace(api_key, "[API KEY]")
+                await evt.respond(info)
+                return
+
+            if "Error Message" in overview_json:
                 await evt.respond("No results, double check that you've chosen a real ticker symbol")
                 return None
 
@@ -140,8 +149,17 @@ class FinanceBot(Plugin):
                     await evt.respond(f"Error: {data['Error Message']}")
                     return
                 
-                if "Note" in data:
-                    await evt.respond(f"API Note: {data['Note']}")
+                if "Information" in data:
+                    info = data["Information"]
+                    # Strip out API key if present
+                    api_key = self.config['alphavantageKey']
+                    if api_key in info:
+                        info = info.replace(api_key, "[API KEY]")
+                    await evt.respond(info)
+                    return
+
+                if not data or "Name" not in data:
+                    await evt.respond(f"No data found for {symbol}/{market}")
                     return
 
                 time_series = data.get("Time Series (Digital Currency Daily)", {})
